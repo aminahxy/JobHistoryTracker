@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="gbk" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="sqls">
+	<insert id="insertjobinfo" parameterClass="map">
+		insert into JobInfo 
+		(JobID,JobName,StartTime,EndTime,User,SubmitAddress,Status,SetupStatus,CleanupStatus,ScheduleNodeID,ScheduleWFID,HiveID) 
+		values(#JobID#,#JobName#,#StartTime#,#EndTime#,#User#,#SubmitAddress#,#Status#,#SetupStatus#,#CleanupStatus#,#ScheduleNodeID#,#ScheduleWFID#,#HiveID#)
+	</insert>	
+	<insert id="inserttaskinfo" parameterClass="map">
+		insert into TaskInfo (Taskid,JobID,Status,StartTime,EndTime,Ismap) 
+		values(#Taskid#,#JobID#,#Status#,#StartTime#,#EndTime#,#Ismap#)
+	</insert>
+	<insert id="insertjobcounter" parameterClass="map">
+		insert into JobCounter (JobID,CounterID,CounterValue) 
+		values(#JobID#,#CounterID#,#CounterValue#) 
+	</insert>
+	<insert id="inserttaskcounter" parameterClass="map">
+		insert into TaskCounter (TaskID,CounterID,CounterValue) values(#TaskID#,#CounterID#,#CounterValue#)
+	</insert>
+	<insert id="insertjobinput" parameterClass="map">
+		insert into JobInput(JobID,InputDir,Columns)  values(#JobID#,#InputDir#,#Columns#)
+	</insert>
+	<insert id="insertjoboutput" parameterClass="map">
+		insert into JobOutput(JobID,OutputDir)   values(#JobID#,#OutputDir#)
+	</insert>
+	<insert id="insertjobconf" parameterClass="map">
+		insert into JobConf(JobID,ConfID,ConfValue)   values(#JobID#,#ConfID#,#ConfValue#)
+	</insert>
+	
+	<select id="getJobDBID" parameterClass="map"	resultClass="java.util.HashMap">
+		select ID id from JobInfo where JobID=#JobID#
+	</select>
+	<select id="getTaskDBID" parameterClass="map"	resultClass="java.util.HashMap">
+		select ID id from TaskInfo where TaskID=#TaskID#
+	</select>
+	
+	<select id="getContent" parameterClass="map"	resultClass="java.util.HashMap">
+		SELECT cstp_id cstepid, cstp_name name, cstp_content content, cstp_progress progress, cstp_status status, cstp_type type,cstp_runAt runat 
+        FROM t_currentStep WHERE cstp_id = #cstp_id#      		
+	</select>
+	
+	<statement  id="changeEndtime" parameterClass="map" resultClass="java.util.HashMap">  
+	    update  t_currentStep set cstp_status=#cstp_status#,cstp_progress="100", cstp_actualEndTime=now(),cstp_msg=#errmsg# where cstp_id=#cstp_id#  
+	</statement >  
+	<statement  id="changeStarttime" parameterClass="map" resultClass="java.util.HashMap">  
+	    update  t_currentStep set cstp_actualStartTime=now(),cstp_status="running" where cstp_id = #cstp_id#  
+	</statement > 
+	<statement  id="changeStatus" parameterClass="map" resultClass="java.util.HashMap">  
+	    update  t_currentStep set cstp_msg=#errmsg#,cstp_status=#status# where cstp_id = #cstp_id#  
+	</statement > 	
+	
+</sqlMap>

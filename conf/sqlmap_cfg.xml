@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	
+  <settings	maxRequests="32" 
+  			maxSessions="10" 
+  			maxTransactions="5" 
+  			useStatementNamespaces="true"   />	
+  			
+  <transactionManager type="JDBC" commitRequired="true">
+    <dataSource type="SIMPLE">
+      <property value="com.mysql.jdbc.Driver" name="JDBC.Driver"/>
+      <property value="jdbc:mysql://localhost/hadoopmeta?characterEncoding=utf8" name="JDBC.ConnectionURL"/>
+      <property value="root" name="JDBC.Username"/>
+      <property value="1123" name="JDBC.Password"/>
+      <property value="15" name="Pool.MaximumActiveConnections"/>
+      <property value="15" name="Pool.MaximumIdleConnections"/>
+      <property value="1000" name="Pool.MaximumWait"/>
+    </dataSource>
+  </transactionManager>  
+
+  <sqlMap resource="sqls.xml"/>
+</sqlMapConfig>

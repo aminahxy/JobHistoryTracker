@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+<property>
+    <name>history.rootdir</name>
+    <!-- value>/data0/hadoop/log/mapred/history/done/version-1/jt1.hadoop.data.sina.com.cn_1344249616803_</value -->
+    <value>/host/workspace/HadoopMetaManager/jobhistorytracker/testdir1</value>
+    <description>This is the root history directory to monitor, and its sub directories should be organized as 2012/10/15/</description>
+</property>
+<property>
+    <name>history.tracker.db.connection</name>
+    <value>jdbc:mysql://10.39.0.101/hadoopmeta?characterEncoding=utf8</value>
+</property>
+<property>
+    <name>history.tracker.db.user</name>
+    <value>hadoop</value>
+</property>
+<property>
+    <name>history.tracker.db.password</name>
+    <value>hadoop0c8c837c</value>
+</property>
+<property>
+    <name>history.catchup.dir</name>
+    <value>/data0/hadoop/log/mapred/history/done/version-1/jt1.hadoop.data.sina.com.cn_1344249616803_/2012/10/15/</value>
+    <description>This is the directory to run catchup in.</description>
+</property>
+<property>
+    <name>history.access.catchup.ts</name>
+    <value>1353635940</value>
+    <description>If this is set, the accessUpdater will run in catchup mode, and this value is the UNIX timestamp of which that day is used to catchup. </description>
+</property>
+
+</configuration>
